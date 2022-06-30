@@ -172,6 +172,9 @@ final class Configuration
     public function getAssetUrl(string $path): string
     {
         if ($this->shouldUseManifest()) {
+            if ($entry = $this->getEntryUrl($path)) {
+                return $entry;
+            }
             return asset(sprintf('/%s/%s', trim($this->config('build_path'), '/\\'), ltrim($path, '/')));
         }
 
